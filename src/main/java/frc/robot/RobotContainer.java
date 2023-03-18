@@ -8,6 +8,7 @@ import javax.swing.plaf.multi.MultiOptionPaneUI;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -35,14 +36,14 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    mDrivetrain.setDefaultCommand(
-      new RunCommand(()-> mDrivetrain.drive(
-        -Deadbander.applyLinearScaledDeadband(mDriver.getLeftY(), 0.1),
-        -Deadbander.applyLinearScaledDeadband(mDriver.getRightX(), 0.1),
-         mDriver.rightBumper().getAsBoolean()     
-      ),
-      mDrivetrain)
-    );
+    // mDrivetrain.setDefaultCommand(
+    //   new RunCommand(()-> mDrivetrain.drive(
+    //     -Deadbander.applyLinearScaledDeadband(mDriver.getLeftY(), 0.1),
+    //     -Deadbander.applyLinearScaledDeadband(mDriver.getRightX(), 0.1),
+    //      mDriver.rightBumper().getAsBoolean()     
+    //   ),
+    //   mDrivetrain)
+    // );
 
     mDriver.a().onTrue(
       mIntake.changeState(IntakeConstants.State.GRAB)
@@ -56,6 +57,34 @@ public class RobotContainer {
     );
     mDriver.b().onFalse(
       mIntake.changeState(IntakeConstants.State.IDLE)
+    );
+
+    mDriver.x().onTrue(
+      new InstantCommand(
+        ()-> mPivot.set(0.75),
+        mPivot
+      )
+    );
+
+    mDriver.x().onFalse(
+      new InstantCommand(
+       ()-> mPivot.set(0),
+       mPivot
+      )
+    );
+
+    mDriver.y().onTrue(
+      new InstantCommand(
+        ()-> mPivot.set(-0.75),
+        mPivot
+      )
+    );
+
+    mDriver.y().onFalse(
+      new InstantCommand(
+        ()->mPivot.set(0),
+        mPivot
+      )
     );
 
     mOperator.a().onTrue(

@@ -94,7 +94,8 @@ public void zeroEncoder() {
   public void periodic() {
     SmartDashboard.putNumber("TBE Raw", mTBEncoder.getAbsolutePosition());
     SmartDashboard.putNumber("TBE Degrees", getThroughBoreAngle());
-    SmartDashboard.putNumber("Neo Degrees", mNeoEncoder.getPosition());
+    SmartDashboard.putNumber("Neo Degrees", mNeoEncoder.getPosition() + mNeoOffset);
+    SmartDashboard.putNumber("Neo Offset", mNeoOffset);
     SmartDashboard.putBoolean("At Setpoint", mPID.atSetpoint());
     SmartDashboard.putNumber("Motor Voltage", mMotor.get() * 12);
     SmartDashboard.putNumber("Set Point", mPID.getGoal().position);

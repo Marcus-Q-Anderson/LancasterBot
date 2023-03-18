@@ -8,13 +8,13 @@ package frc.robot;
 public class Constants {
 
     public static class RobotConstants{
-        public static double maxVoltage = 10;
+        public static double maxVoltage = 15;
     }
 
     public static class IntakeConstants {
     
-        public static final double kInSpeed = 0.3;
-        public static final double kOutSpeed = 0.2;
+        public static final double kInSpeed = 0.9;
+        public static final double kOutSpeed = 0.9;
     
         public static final double kS = 1;
     
@@ -43,7 +43,7 @@ public class Constants {
         public static double kGearing = ((1.0/15)*(16.0/60));
         public static double kVelocityConversion = kGearing*(1/60.0)*360;
         public static double kPositionConversion = kGearing*360;
-        public static double kThroughboreOffset = 0;
+        public static double kThroughboreOffset = 0.149;
 
         
     
